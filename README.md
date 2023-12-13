@@ -53,10 +53,17 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 
 ## prior art
 
+TODO: expand
+
 ### other languages
 
-TODO
+| language | chunks | windows | chunks of 0? | truncates windows? |
+|----------|--------|---------|--------------|--------------------|
+| Haskell (split) | `chunksOf` | `divvy` | infinite empty lists | yes |
 
 ### JS libraries
 
-TODO
+| library | chunks | windows | chunks of 0? | truncates windows? |
+|---------|--------|---------|--------------|--------------------|
+| Lodash / Underscore | `chunk` | -- | infinite empty lists | N/A |
+| Ramda | `splitEvery` | `aperture` | infinite empty lists | no |
