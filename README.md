@@ -59,6 +59,7 @@ TODO: expand
 
 | language | chunks | windows | chunks of 0? | truncates windows? |
 |----------|--------|---------|--------------|--------------------|
+| Clojure | `(partition n n)` | `(partition n 1)` | infinite empty lists | when insufficient padding; terminates after 1 |
 | Haskell (split) | `chunksOf` | `divvy` | infinite empty lists | yes |
 
 ### JS libraries
