@@ -47,9 +47,11 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 * chunking by 0 length?
 * windows advancing by 0?
 * should truncated chunks be returned?
+  * filler/padding elements?
 * should windows ever be truncated?
   * should preserve equivalence with chunks, so answer should match chunks
   * only when full iterator doesn't fill a single window?
+  * just lock step to 1 for windowing?
 
 ## prior art
 
@@ -61,6 +63,8 @@ TODO: expand
 |----------|--------|---------|--------------|--------------------|
 | Clojure | `(partition n n)` | `(partition n 1)` | infinite empty lists | when insufficient padding; terminates after 1 |
 | Haskell (split) | `chunksOf` | `divvy` | infinite empty lists | yes |
+| Python (more-itertools) | `grouper` | `windowed` | empty iterator | no, mandatory fill value |
+| Ruby (Enumerable) | `each_slice` | `each_cons` | throws | no, step not configurable |
 
 ### JS libraries
 
