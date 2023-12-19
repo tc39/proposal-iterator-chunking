@@ -59,8 +59,9 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 
 | language | library | chunks | windows | chunks of 0? | truncates windows? |
 |----------|---------|--------|---------|--------------|--------------------|
-| Clojure | core | `(partition n n)` | `(partition n 1)` | infinite empty lists | when insufficient padding; terminates after 1 |
+| Clojure | core | `partition` | `partition` | infinite empty lists | when insufficient padding;<br/>terminates after 1 |
 | Haskell | split | `chunksOf` | `divvy` | infinite empty lists | yes |
+| .NET | System.Linq | `Enumerable.Chunk` | -- | throws | N/A |
 | Python | more-itertools | `grouper` | `windowed` | empty iterator | no, mandatory fill value |
 | Ruby | Enumerable | `each_slice` | `each_cons` | throws | no, step not configurable |
 | Rust | Iterator | `array_chunks` | `map_windows` | panics | no, step not configurable |
