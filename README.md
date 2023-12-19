@@ -63,6 +63,7 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 | Clojure | core | `partition` | `partition` | infinite empty lists | when insufficient padding;<br/>terminates after 1 |
 | Elm | List.Extra | `groupsOf` | `groupsOfWithStep` | empty list | no |
 | Haskell | split | `chunksOf` | `divvy` | infinite empty lists | yes |
+| Java | Stream | -- | -- | N/A | N/A |
 | Kotlin | Iterable | `chunked` | `windowed` | throws | configurable via parameter |
 | .NET | System.Linq | `Enumerable.Chunk` | -- | throws | N/A |
 | PHP | array | `array_chunk` | -- | throws | N/A |
@@ -71,6 +72,7 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 | Rust | Iterator | `array_chunks` | `map_windows` | panics | no, step not configurable |
 | Rust | slice | `chunks` | `windows` | panics | no, step not configurable |
 | Scala | Seq | `grouped` | `sliding` | throws | yes |
+| Swift | Sequence | -- | -- | N/A | N/A |
 
 ### JS libraries
 
