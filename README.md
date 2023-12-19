@@ -55,20 +55,22 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 
 ## prior art
 
-TODO: expand
-
 ### other languages
 
-| language | chunks | windows | chunks of 0? | truncates windows? |
-|----------|--------|---------|--------------|--------------------|
-| Clojure | `(partition n n)` | `(partition n 1)` | infinite empty lists | when insufficient padding; terminates after 1 |
-| Haskell (split) | `chunksOf` | `divvy` | infinite empty lists | yes |
-| Python (more-itertools) | `grouper` | `windowed` | empty iterator | no, mandatory fill value |
-| Ruby (Enumerable) | `each_slice` | `each_cons` | throws | no, step not configurable |
+| language | library | chunks | windows | chunks of 0? | truncates windows? |
+|----------|---------|--------|---------|--------------|--------------------|
+| Clojure | core | `(partition n n)` | `(partition n 1)` | infinite empty lists | when insufficient padding; terminates after 1 |
+| Haskell | split | `chunksOf` | `divvy` | infinite empty lists | yes |
+| Python | more-itertools | `grouper` | `windowed` | empty iterator | no, mandatory fill value |
+| Ruby | Enumerable | `each_slice` | `each_cons` | throws | no, step not configurable |
+| Rust | Iterator | `array_chunks` | `map_windows` | panics | no, step not configurable |
+| Rust | slice | `chunks` | `windows` | panics | no, step not configurable |
+| Scala | Seq | `grouped` | `sliding` | throws | yes |
 
 ### JS libraries
 
 | library | chunks | windows | chunks of 0? | truncates windows? |
 |---------|--------|---------|--------------|--------------------|
+| `chunk` | `chunk` | -- | coerces 0 to false 😞 | N/A |
 | Lodash / Underscore | `chunk` | -- | infinite empty lists | N/A |
 | Ramda | `splitEvery` | `aperture` | infinite empty lists | no |
