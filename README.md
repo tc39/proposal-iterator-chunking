@@ -44,6 +44,7 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 ## design space
 
 * sliding windows sliding in/out past ends instead of sliding within boundaries?
+* default chunk size to 2?
 * chunking by 0 length?
 * windows advancing by 0?
 * should truncated chunks be returned?
@@ -82,3 +83,4 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 | `itertools-ts` | `chunkwise` | `chunkwiseOverlap` | throws | yes |
 | Lodash / Underscore | `chunk` | -- | infinite empty arrays | N/A |
 | Ramda | `splitEvery` | `aperture` | infinite empty arrays | no |
+| wu | `chunk` | -- | collects everything into a single array | N/A |
