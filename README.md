@@ -60,8 +60,10 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 | language | library | chunks | windows | chunks of 0? | truncates windows? |
 |----------|---------|--------|---------|--------------|--------------------|
 | Clojure | core | `partition` | `partition` | infinite empty lists | when insufficient padding;<br/>terminates after 1 |
+| Elm | List.Extra | `groupsOf` | `groupsOfWithStep` | empty list | no |
 | Haskell | split | `chunksOf` | `divvy` | infinite empty lists | yes |
 | .NET | System.Linq | `Enumerable.Chunk` | -- | throws | N/A |
+| PHP | array | `array_chunk` | -- | throws | N/A |
 | Python | more-itertools | `grouper` | `windowed` | empty iterator | no, mandatory fill value |
 | Ruby | Enumerable | `each_slice` | `each_cons` | throws | no, step not configurable |
 | Rust | Iterator | `array_chunks` | `map_windows` | panics | no, step not configurable |
@@ -73,5 +75,10 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 | library | chunks | windows | chunks of 0? | truncates windows? |
 |---------|--------|---------|--------------|--------------------|
 | `chunk` | `chunk` | -- | coerces 0 to false 😞 | N/A |
-| Lodash / Underscore | `chunk` | -- | infinite empty lists | N/A |
-| Ramda | `splitEvery` | `aperture` | infinite empty lists | no |
+| `extra-iterable` | `chunk` | `chunk` | infinite empty arrays | yes |
+| `iter-ops` | `page` | -- | throws | N/A |
+| `iter-tools` | `batch` | -- | throws | N/A |
+| `iterablefu` | `chunk` | -- | collects everything into a single array | N/A |
+| `itertools-ts` | `chunkwise` | `chunkwiseOverlap` | throws | yes |
+| Lodash / Underscore | `chunk` | -- | infinite empty arrays | N/A |
+| Ramda | `splitEvery` | `aperture` | infinite empty arrays | no |
