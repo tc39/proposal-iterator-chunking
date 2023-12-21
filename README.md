@@ -67,6 +67,7 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 | Kotlin | Iterable | `chunked` | `windowed` | throws | configurable via parameter |
 | .NET | System.Linq | `Enumerable.Chunk` | -- | throws | N/A |
 | PHP | array | `array_chunk` | -- | throws | N/A |
+| Python | itertools (3.12) | `batched` | -- | ?? | N/A |
 | Python | more-itertools | `grouper` | `windowed` | empty iterator | no, mandatory fill value |
 | Ruby | Enumerable | `each_slice` | `each_cons` | throws | no, step not configurable |
 | Rust | Iterator | `array_chunks` | `map_windows` | panics | no, step not configurable |
