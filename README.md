@@ -5,6 +5,8 @@ A TC39 proposal to add a method to iterators for producing an iterator of its su
 
 **Stage:** 0
 
+See the [January 2024 presentation to committe](https://docs.google.com/presentation/d/1PvU0wOygklWZQUFIZWFLJRyZnFfgd-7LZh6T_z5Ge8g/edit).
+
 ## motivation
 
 It can be useful to consume a stream by more than one value at a time. For example, certain algorithms require looking at adjacent elements.
