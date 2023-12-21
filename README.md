@@ -82,7 +82,7 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 | `chunk` | `chunk` | -- | coerces 0 to false 😞 | N/A |
 | `extra-iterable` | `chunk` | `chunk` | infinite empty arrays | yes |
 | `iter-ops` | `page` | -- | throws | N/A |
-| `iter-tools` | `batch` | -- | throws | N/A |
+| `iter-tools` | `batch` | `window`, `windowAhead`, `windowBehind` | throws | optionally |
 | `iterablefu` | `chunk` | -- | collects everything into a single array | N/A |
 | `itertools-ts` | `chunkwise` | `chunkwiseOverlap` | throws | yes |
 | Lodash / Underscore | `chunk` | -- | infinite empty arrays | N/A |
