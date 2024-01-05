@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "proposal-iterator-chunking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tc39/proposal-iterator-chunking.git"
+  },
+  "author": "Michael Ficarra",
+  "bugs": {
+    "url": "https://github.com/tc39/proposal-iterator-chunking/issues"
+  },
+  "homepage": "https://github.com/tc39/proposal-iterator-chunking#readme",
+  "devDependencies": {
+    "typescript": "5.2.2"
+  }
+}
