@@ -54,7 +54,7 @@ function windows(this: unknown, windowSize: unknown = 2): Generator<unknown> {
   ) {
     throw new RangeError;
   }
-  return windowsImpl(this as Iterator<unknown>, windowSize)
+  return windowsImpl(this as Iterator<unknown>, windowSize);
 }
 
 Object.defineProperty(IteratorPrototype, 'chunks', {
