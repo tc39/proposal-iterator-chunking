@@ -89,4 +89,5 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 | `itertools-ts` | `chunkwise` | `chunkwiseOverlap` | throws | yes |
 | Lodash / Underscore | `chunk` | -- | infinite empty arrays | N/A |
 | Ramda | `splitEvery` | `aperture` | infinite empty arrays | no |
+| sequency | `chunk` | -- | throws | N/A |
 | wu | `chunk` | -- | collects everything into a single array | N/A |
