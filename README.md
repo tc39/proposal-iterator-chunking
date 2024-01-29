@@ -62,6 +62,7 @@ let chunksOf4 = Array.from(digits.windows(4, 4));
 
 | language | library | chunks | windows | chunks of 0? | truncates windows? |
 |----------|---------|--------|---------|--------------|--------------------|
+| C++ | std::ranges::views | `chunk` | `slide` | undefined behavior | no |
 | Clojure | core | `partition` | `partition` | infinite empty lists | when insufficient padding;<br/>terminates after 1 |
 | Elm | List.Extra | `groupsOf` | `groupsOfWithStep` | empty list | no |
 | Haskell | split | `chunksOf` | `divvy` | infinite empty lists | yes |
