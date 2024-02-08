@@ -3,7 +3,7 @@ Iterator Chunking
 
 A TC39 proposal to add a method to iterators for producing an iterator of its subsequences.
 
-**Stage:** 0
+**Stage:** 1
 
 See the [January 2024 presentation to committee](https://docs.google.com/presentation/d/1PvU0wOygklWZQUFIZWFLJRyZnFfgd-7LZh6T_z5Ge8g/edit).
 
