@@ -6,7 +6,8 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "node --test test"
+    "spec": "ecmarkup --mark-effects --load-biblio @tc39/ecma262-biblio --load-biblio ./iterator-helpers-biblio.json --write-biblio biblio.json --lint-spec --strict spec.emu --assets-dir dist dist/index.html",
+    "test": "node --test"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,8 @@
   },
   "homepage": "https://github.com/tc39/proposal-iterator-chunking#readme",
   "devDependencies": {
+    "@tc39/ecma262-biblio": "2.1.2767",
+    "ecmarkup": "19.0.0",
     "typescript": "5.2.2"
   }
 }

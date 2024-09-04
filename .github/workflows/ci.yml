@@ -15,9 +15,11 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 20
-    - name: Build
-      run: >
-        npm ci &&
-        npm run build
-    - name: Test
+    - name: install deps
+      run: npm ci
+    - name: build spec
+      run: npm run spec
+    - name: build polyfill
+      run: npm run build
+    - name: test polyfill
       run: npm test
