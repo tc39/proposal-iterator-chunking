@@ -22,7 +22,7 @@ copyright: false
       1. Let _buffer_ be a new empty List.
       1. Repeat,
         1. Let _value_ be ? IteratorStepValue(_iterated_).
-        1. If _value_ is ~done~, return *undefined*.
+        1. If _value_ is ~done~, return ~unused~.
         1. Append _value_ to _buffer_.
         1. If the number of elements in _buffer_ is ℝ(_chunkSize_), then
           1. Let _completion_ be Completion(Yield(CreateArrayFromList(_buffer_))).
@@ -47,7 +47,7 @@ copyright: false
       1. Let _buffer_ be a new empty List.
       1. Repeat,
         1. Let _value_ be ? IteratorStepValue(_iterated_).
-        1. If _value_ is ~done~, return *undefined*.
+        1. If _value_ is ~done~, return ~unused~.
         1. Append _value_ to _buffer_.
         1. If the number of elements in _buffer_ is ℝ(_windowSize_), then
           1. Let _completion_ be Completion(Yield(CreateArrayFromList(_buffer_))).
