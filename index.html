@@ -1,0 +1,62 @@
+<!doctype html>
+<head><meta charset="utf-8"><meta property="og:image" content="https://tc39.es/ecmarkup/ecma-logo.png"><meta property="og:title" content="Iterator Chunking"><meta property="og:description" content="Iterator.prototype.chunks ( [ _chunkSize_ ] )
+  This method performs the following steps when called:
+  
+    1. Let _O_ be the *this* value.
+    1. If _O_ is not an Object, throw a *TypeError* exception.
+    1. If _chunkSize_ is not present, set _chunkSize_ to *2*𝔽.
+    1. If _chunkSize_ is not">
+<title>Iterator Chunking</title><script src="ecmarkup.js?cache=Gjd6FWtM" defer=""></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/base16/solarized-light.min.css"><link rel="stylesheet" href="ecmarkup.css"><link rel="stylesheet" href="print.css" media="print"><style>
+    @media print {
+      @page :left {
+        @bottom-right {
+          content: '© Ecma International 2024';
+        }
+      }
+      @page :right {
+        @bottom-left {
+          content: '© Ecma International 2024';
+        }
+      }
+      @page :first {
+        @bottom-left {
+          content: '';
+        }
+        @bottom-right {
+          content: '';
+        }
+      }
+      @page :blank {
+        @bottom-left {
+          content: '';
+        }
+        @bottom-right {
+          content: '';
+        }
+      }
+    }
+    </style></head><body><div id="shortcuts-help">
+<ul>
+  <li><span>Toggle shortcuts help</span><code>?</code></li>
+  <li><span>Toggle "can call user code" annotations</span><code>u</code></li>
+
+  <li><span>Jump to search box</span><code>/</code></li>
+  <li><span>Toggle pinning of the current clause</span><code>p</code></li>
+  <li><span>Jump to <i>n</i>th pin</span><code>1-9</code></li>
+</ul></div><div id="menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; stroke:currentColor" viewBox="0 0 120 120" width="54" height="54">
+      <title>Menu</title>
+      <path stroke-width="10" stroke-linecap="round" d="M30,60 h60  M30,30 m0,5 h60  M30,90 m0,-5 h60"></path>
+    </svg></div><div id="menu-spacer" class="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins<button class="unpin-all">clear</button></div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-iterator.prototype.chunks" title="Iterator.prototype.chunks ( [ chunkSize ] )"><span class="secnum">1</span> Iterator.prototype.chunks ( [ <var>chunkSize</var> ] )</a></li><li><span class="item-toggle-none"></span><a href="#sec-iterator.prototype.windows" title="Iterator.prototype.windows ( [ windowSize ] )"><span class="secnum">2</span> Iterator.prototype.windows ( [ <var>windowSize</var> ] )</a></li></ol></div></div><div id="spec-container"><h1 class="version">Stage 1 Draft / September 4, 2024</h1><h1 class="title">Iterator Chunking</h1>
+
+<emu-clause id="sec-iterator.prototype.chunks">
+  <h1><span class="secnum">1</span> Iterator.prototype.chunks ( [ <var>chunkSize</var> ] )</h1>
+  <p>This method performs the following steps when called:</p>
+  <emu-alg><ol><li>Let <var>O</var> be the <emu-val>this</emu-val> value.</li><li>If <var>O</var> <emu-xref href="#sec-object-type"><a href="https://tc39.es/ecma262/#sec-object-type">is not an Object</a></emu-xref>, throw a <emu-val>TypeError</emu-val> exception.</li><li>If <var>chunkSize</var> is not present, set <var>chunkSize</var> to <emu-val>2</emu-val><sub>𝔽</sub>.</li><li>If <var>chunkSize</var> is not an <emu-xref href="#integral-number"><a href="https://tc39.es/ecma262/#integral-number">integral Number</a></emu-xref> in the <emu-xref href="#inclusive-interval"><a href="https://tc39.es/ecma262/#inclusive-interval">inclusive interval</a></emu-xref> from <emu-val>1</emu-val><sub>𝔽</sub> to <emu-xref aoid="𝔽"><a href="https://tc39.es/ecma262/#𝔽">𝔽</a></emu-xref>(2<sup>32</sup> - 1), throw a <emu-val>RangeError</emu-val> exception.</li><li>Let <var>iterated</var> be ?&nbsp;<emu-xref aoid="GetIteratorDirect"><a href="https://tc39.es/ecma262/#sec-getiteratordirect" class="e-user-code">GetIteratorDirect</a></emu-xref>(<var>O</var>).</li><li>Let <var>closure</var> be a new <emu-xref href="#sec-abstract-closure"><a href="https://tc39.es/ecma262/#sec-abstract-closure">Abstract Closure</a></emu-xref> with no parameters that captures <var>iterated</var> and <var>chunkSize</var> and performs the following steps when called:<ol><li>Let <var>buffer</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Repeat,<ol><li>Let <var>value</var> be ?&nbsp;<emu-xref aoid="IteratorStepValue"><a href="https://tc39.es/ecma262/#sec-iteratorstepvalue" class="e-user-code">IteratorStepValue</a></emu-xref>(<var>iterated</var>).</li><li>If <var>value</var> is <emu-const>done</emu-const>, return <emu-val>undefined</emu-val>.</li><li>Append <var>value</var> to <var>buffer</var>.</li><li>If the number of elements in <var>buffer</var> is <emu-xref aoid="ℝ"><a href="https://tc39.es/ecma262/#ℝ">ℝ</a></emu-xref>(<var>chunkSize</var>), then<ol><li>Let <var>completion</var> be <emu-xref aoid="Completion"><a href="https://tc39.es/ecma262/#sec-completion-ao">Completion</a></emu-xref>(<emu-xref aoid="Yield"><a href="https://tc39.es/ecma262/#sec-yield" class="e-user-code">Yield</a></emu-xref>(<emu-xref aoid="CreateArrayFromList"><a href="https://tc39.es/ecma262/#sec-createarrayfromlist">CreateArrayFromList</a></emu-xref>(<var>buffer</var>))).</li><li><emu-xref aoid="IfAbruptCloseIterator"><a href="https://tc39.es/ecma262/#sec-ifabruptcloseiterator" class="e-user-code">IfAbruptCloseIterator</a></emu-xref>(<var>completion</var>, <var>iterated</var>).</li><li>Set <var>buffer</var> to a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li></ol></li></ol></li></ol></li><li>Let <var>result</var> be <emu-xref aoid="CreateIteratorFromClosure"><a href="https://tc39.es/ecma262/#sec-createiteratorfromclosure">CreateIteratorFromClosure</a></emu-xref>(<var>closure</var>, <emu-val>"Iterator Helper"</emu-val>, <emu-xref href="#sec-%iteratorhelperprototype%-object"><a href="https://tc39.es/ecma262/#sec-%iteratorhelperprototype%-object">%IteratorHelperPrototype%</a></emu-xref>, « <var class="field">[[UnderlyingIterators]]</var>&nbsp;»).</li><li>Set <var>result</var>.<var class="field">[[UnderlyingIterators]]</var> to « <var>iterated</var>&nbsp;».</li><li>Return <var>result</var>.</li></ol></emu-alg>
+</emu-clause>
+
+<emu-clause id="sec-iterator.prototype.windows">
+  <h1><span class="secnum">2</span> Iterator.prototype.windows ( [ <var>windowSize</var> ] )</h1>
+  <p>This method performs the following steps when called:</p>
+  <emu-alg><ol><li>Let <var>O</var> be the <emu-val>this</emu-val> value.</li><li>If <var>O</var> <emu-xref href="#sec-object-type"><a href="https://tc39.es/ecma262/#sec-object-type">is not an Object</a></emu-xref>, throw a <emu-val>TypeError</emu-val> exception.</li><li>If <var>windowSize</var> is not present, set <var>windowSize</var> to <emu-val>2</emu-val><sub>𝔽</sub>.</li><li>If <var>windowSize</var> is not an <emu-xref href="#integral-number"><a href="https://tc39.es/ecma262/#integral-number">integral Number</a></emu-xref> in the <emu-xref href="#inclusive-interval"><a href="https://tc39.es/ecma262/#inclusive-interval">inclusive interval</a></emu-xref> from <emu-val>1</emu-val><sub>𝔽</sub> to <emu-xref aoid="𝔽"><a href="https://tc39.es/ecma262/#𝔽">𝔽</a></emu-xref>(2<sup>32</sup> - 1), throw a <emu-val>RangeError</emu-val> exception.</li><li>Let <var>iterated</var> be ?&nbsp;<emu-xref aoid="GetIteratorDirect"><a href="https://tc39.es/ecma262/#sec-getiteratordirect" class="e-user-code">GetIteratorDirect</a></emu-xref>(<var>O</var>).</li><li>Let <var>closure</var> be a new <emu-xref href="#sec-abstract-closure"><a href="https://tc39.es/ecma262/#sec-abstract-closure">Abstract Closure</a></emu-xref> with no parameters that captures <var>iterated</var> and <var>windowSize</var> and performs the following steps when called:<ol><li>Let <var>buffer</var> be a new empty <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">List</a></emu-xref>.</li><li>Repeat,<ol><li>Let <var>value</var> be ?&nbsp;<emu-xref aoid="IteratorStepValue"><a href="https://tc39.es/ecma262/#sec-iteratorstepvalue" class="e-user-code">IteratorStepValue</a></emu-xref>(<var>iterated</var>).</li><li>If <var>value</var> is <emu-const>done</emu-const>, return <emu-val>undefined</emu-val>.</li><li>Append <var>value</var> to <var>buffer</var>.</li><li>If the number of elements in <var>buffer</var> is <emu-xref aoid="ℝ"><a href="https://tc39.es/ecma262/#ℝ">ℝ</a></emu-xref>(<var>windowSize</var>), then<ol><li>Let <var>completion</var> be <emu-xref aoid="Completion"><a href="https://tc39.es/ecma262/#sec-completion-ao">Completion</a></emu-xref>(<emu-xref aoid="Yield"><a href="https://tc39.es/ecma262/#sec-yield" class="e-user-code">Yield</a></emu-xref>(<emu-xref aoid="CreateArrayFromList"><a href="https://tc39.es/ecma262/#sec-createarrayfromlist">CreateArrayFromList</a></emu-xref>(<var>buffer</var>))).</li><li><emu-xref aoid="IfAbruptCloseIterator"><a href="https://tc39.es/ecma262/#sec-ifabruptcloseiterator" class="e-user-code">IfAbruptCloseIterator</a></emu-xref>(<var>completion</var>, <var>iterated</var>).</li><li>Remove the first element from <var>buffer</var>.</li></ol></li></ol></li></ol></li><li>Let <var>result</var> be <emu-xref aoid="CreateIteratorFromClosure"><a href="https://tc39.es/ecma262/#sec-createiteratorfromclosure">CreateIteratorFromClosure</a></emu-xref>(<var>closure</var>, <emu-val>"Iterator Helper"</emu-val>, <emu-xref href="#sec-%iteratorhelperprototype%-object"><a href="https://tc39.es/ecma262/#sec-%iteratorhelperprototype%-object">%IteratorHelperPrototype%</a></emu-xref>, « <var class="field">[[UnderlyingIterators]]</var>&nbsp;»).</li><li>Set <var>result</var>.<var class="field">[[UnderlyingIterators]]</var> to « <var>iterated</var>&nbsp;».</li><li>Return <var>result</var>.</li></ol></emu-alg>
+</emu-clause>
+</div></body>
