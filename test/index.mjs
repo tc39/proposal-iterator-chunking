@@ -12,7 +12,7 @@ function* nats(limit) {
 
 test('chunks', async t => {
   assert.deepEqual(
-    Array.from(nats(5).chunks()),
+    Array.from(nats(5).chunks(2)),
     [[0, 1], [2, 3], [4]],
   );
   assert.deepEqual(
@@ -37,6 +37,9 @@ test('chunks', async t => {
   );
 
   assert.throws(() => {
+    nats(1).chunks();
+  }, RangeError)
+  assert.throws(() => {
     nats(1).chunks([2]);
   }, RangeError)
   assert.throws(() => {
@@ -55,7 +58,7 @@ test('chunks', async t => {
 
 test('windows', async t => {
   assert.deepEqual(
-    Array.from(nats(5).windows()),
+    Array.from(nats(5).windows(2)),
     [[0, 1], [1, 2], [2, 3], [3, 4]],
   );
   assert.deepEqual(
@@ -75,6 +78,9 @@ test('windows', async t => {
     [],
   );
 
+  assert.throws(() => {
+    nats(1).windows()
+  }, RangeError)
   assert.throws(() => {
     nats(1).windows([2]);
   }, RangeError)

@@ -19,7 +19,7 @@ function* chunksImpl<A>(iter: Iterator<A>, chunkSize: number): Generator<Array<A
 }
 
 function chunks<A>(this: Iterator<A>, chunkSize: number): Generator<Array<A>>
-function chunks(this: unknown, chunkSize: unknown = 2): Generator<unknown> {
+function chunks(this: unknown, chunkSize: unknown): Generator<unknown> {
   if (
     typeof chunkSize !== 'number'
     || chunkSize <= 0
@@ -45,7 +45,7 @@ function* windowsImpl<A>(iter: Iterator<A>, windowSize: number): Generator<Array
 }
 
 function windows<A>(this: Iterator<A>, windowSize: number): Generator<Array<A>>
-function windows(this: unknown, windowSize: unknown = 2): Generator<unknown> {
+function windows(this: unknown, windowSize: unknown): Generator<unknown> {
   if (
     typeof windowSize !== 'number'
     || windowSize <= 0
