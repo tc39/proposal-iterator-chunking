@@ -29,17 +29,17 @@ let chunksOf4 = Array.from(digits.values().chunks(4));
 A more flexible solution is a sliding window method, usually named `windows`:
 
 ```js
-let windowsOf3 = Array.from(digits.windows(3));
+let windowsOf3 = Array.from(digits.values().windows(3));
 // [ [0, 1, 2], [1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7], [6, 7, 8], [7, 8, 9] ]
 
-let windowsOf2AdvancingBy3 = Array.from(digits.windows(2, 3));
+let windowsOf2AdvancingBy3 = Array.from(digits.values().windows(2, 3));
 // [ [0, 1], [3, 4], [6, 7], [9] ]
 ```
 
 `chunks` is just a specialisation of `windows` where `chunks(n)` is equivalent to `windows(n, n)`.
 
 ```js
-let chunksOf4 = Array.from(digits.windows(4, 4));
+let chunksOf4 = Array.from(digits.values().windows(4, 4));
 // [ [0, 1, 2, 3], [4, 5, 6, 7], [8, 9] ]
 ```
 
