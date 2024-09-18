@@ -14,15 +14,15 @@ It can be useful to consume a stream by more than one value at a time. For examp
 A common solution for this is a `chunks` method that works like the following:
 
 ```js
-let digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].values();
+let digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-let chunksOf2 = Array.from(digits.chunks(2));
+let chunksOf2 = Array.from(digits.values().chunks(2));
 // [ [0, 1], [2, 3], [4, 5], [6, 7], [8, 9] ]
 
-let chunksOf3 = Array.from(digits.chunks(3));
+let chunksOf3 = Array.from(digits.values().chunks(3));
 // [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [9] ]
 
-let chunksOf4 = Array.from(digits.chunks(4));
+let chunksOf4 = Array.from(digits.values().chunks(4));
 // [ [0, 1, 2, 3], [4, 5, 6, 7], [8, 9] ]
 ```
 
