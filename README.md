@@ -1,60 +1,67 @@
 Iterator Chunking
 =================
 
-A TC39 proposal to add a method to iterators for producing an iterator of its subsequences.
+A TC39 proposal to consume an iterator as either overlapping or non-overlapping subsequences of configurable size.
 
 **Stage:** 1
 
-See the [January 2024 presentation to committee](https://docs.google.com/presentation/d/1PvU0wOygklWZQUFIZWFLJRyZnFfgd-7LZh6T_z5Ge8g/edit).
+**Specification:** https://tc39.es/proposal-iterator-chunking/
+
+## presentations to committee
+
+* [January 2024](https://docs.google.com/presentation/d/1PvU0wOygklWZQUFIZWFLJRyZnFfgd-7LZh6T_z5Ge8g)
+* [October 2024](https://docs.google.com/presentation/d/1V2pFMn0s6UIdrjbfaBlfdu9XE4v3u6qD2gBwLRycVr8)
 
 ## motivation
 
 It can be useful to consume a stream by more than one value at a time. For example, certain algorithms require looking at adjacent elements.
 
-A common solution for this is a `chunks` method that works like the following:
+### chunking
+
+This is commonly solved for non-overlapping subsequences with a "chunking" method that works like the following:
 
 ```js
-let digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const digits = () => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].values();
 
-let chunksOf2 = Array.from(digits.values().chunks(2));
+let chunksOf2 = Array.from(digits().chunks(2));
 // [ [0, 1], [2, 3], [4, 5], [6, 7], [8, 9] ]
 
-let chunksOf3 = Array.from(digits.values().chunks(3));
+let chunksOf3 = Array.from(digits().chunks(3));
 // [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [9] ]
 
-let chunksOf4 = Array.from(digits.values().chunks(4));
+let chunksOf4 = Array.from(digits().chunks(4));
 // [ [0, 1, 2, 3], [4, 5, 6, 7], [8, 9] ]
 ```
 
-A more flexible solution is a sliding window method, usually named `windows`:
+#### use cases for chunking
+
+* pagination
+* columnar/grid layouts, such as calendars
+* batch/stream processing
+* matrix operations
+* formatting/encoding
+* bucketing (using a computed chunk size, for iterators of known size)
+
+### sliding window
+
+When overlapping sequences are needed, this is commonly called a "sliding window".
 
 ```js
-let windowsOf3 = Array.from(digits.values().windows(3));
+let windowsOf2 = Array.from(digits().windows(2));
+// [ [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9] ]
+
+let windowsOf3 = Array.from(digits().windows(3));
 // [ [0, 1, 2], [1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7], [6, 7, 8], [7, 8, 9] ]
 
-let windowsOf2AdvancingBy3 = Array.from(digits.values().windows(2, 3));
-// [ [0, 1], [3, 4], [6, 7], [9] ]
+let windowsOf4 = Array.from(digits().windows(4));
+// [ [0, 1, 2, 3], [1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5, 6], [4, 5, 6, 7], [5, 6, 7, 8], [6, 7, 8, 9] ]
 ```
 
-`chunks` is just a specialisation of `windows` where `chunks(n)` is equivalent to `windows(n, n)`.
+#### use cases for sliding windows
 
-```js
-let chunksOf4 = Array.from(digits.values().windows(4, 4));
-// [ [0, 1, 2, 3], [4, 5, 6, 7], [8, 9] ]
-```
-
-## design space
-
-* sliding windows sliding in/out past ends instead of sliding within boundaries?
-* default chunk size to 2?
-* chunking by 0 length?
-* windows advancing by 0?
-* should truncated chunks be returned?
-  * filler/padding elements?
-* should windows ever be truncated?
-  * should preserve equivalence with chunks, so answer should match chunks
-  * only when full iterator doesn't fill a single window?
-  * just lock step to 1 for windowing?
+* running/continuous computations, such as averages
+* context-sensitive algorithms, such as pairwise comparisons
+* carousels and their analogues (when applied to an infinite cycle)
 
 ## prior art
 
