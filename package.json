@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/tc39/proposal-iterator-chunking#readme",
   "devDependencies": {
-    "@tc39/ecma262-biblio": "2.1.2767",
+    "@tc39/ecma262-biblio": "2.1.2775",
     "ecmarkup": "19.0.0",
     "typescript": "5.2.2"
   }
