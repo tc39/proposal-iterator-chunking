@@ -3,7 +3,7 @@ Iterator Chunking
 
 A TC39 proposal to consume an iterator as either overlapping or non-overlapping subsequences of configurable size.
 
-**Stage:** 1
+**Stage:** 2
 
 **Specification:** https://tc39.es/proposal-iterator-chunking/
 
