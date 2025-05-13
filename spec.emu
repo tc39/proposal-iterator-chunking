@@ -50,7 +50,7 @@ copyright: false
         1. Let _value_ be ? IteratorStepValue(_iterated_).
         1. If _value_ is ~done~, then
           1. If the number of elements in _buffer_ &lt; ℝ(_windowSize_), perform ? Yield(CreateArrayFromList(_buffer_)).
-          1. Else, return ReturnCompletion(*undefined*).
+          1. Return ReturnCompletion(*undefined*).
         1. Append _value_ to _buffer_.
         1. If the number of elements in _buffer_ is ℝ(_windowSize_), then
           1. Let _completion_ be Completion(Yield(CreateArrayFromList(_buffer_))).
