@@ -9,8 +9,9 @@ A TC39 proposal to consume an iterator as either overlapping or non-overlapping 
 
 ## presentations to committee
 
-* [January 2024](https://docs.google.com/presentation/d/1PvU0wOygklWZQUFIZWFLJRyZnFfgd-7LZh6T_z5Ge8g)
+* [May 2025](https://docs.google.com/presentation/d/1Mse7PDM0vcMg4Ag_SK1_OGwVwrJuVxKz-qaWj2RyX8o)
 * [October 2024](https://docs.google.com/presentation/d/1V2pFMn0s6UIdrjbfaBlfdu9XE4v3u6qD2gBwLRycVr8)
+* [January 2024](https://docs.google.com/presentation/d/1PvU0wOygklWZQUFIZWFLJRyZnFfgd-7LZh6T_z5Ge8g)
 
 ## motivation
 
