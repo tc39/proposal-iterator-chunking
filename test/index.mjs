@@ -97,3 +97,45 @@ test('windows', async t => {
     nats(1).windows(Math.pow(2, 53));
   }, RangeError)
 });
+
+test('sliding', async t => {
+  assert.deepEqual(
+    Array.from(nats(5).sliding(2)),
+    [[0, 1], [1, 2], [2, 3], [3, 4]],
+  );
+  assert.deepEqual(
+    Array.from(nats(5).sliding(1)),
+    [[0], [1], [2], [3], [4]],
+  );
+  assert.deepEqual(
+    Array.from(nats(6).sliding(3)),
+    [[0, 1, 2], [1, 2, 3], [2, 3, 4], [3, 4, 5]],
+  );
+  assert.deepEqual(
+    Array.from(nats(6).sliding(100)),
+    [[0, 1, 2, 3, 4, 5]],
+  );
+  assert.deepEqual(
+    Array.from(nats(0).sliding(2)),
+    [],
+  );
+
+  assert.throws(() => {
+    nats(1).sliding()
+  }, RangeError)
+  assert.throws(() => {
+    nats(1).sliding([2]);
+  }, RangeError)
+  assert.throws(() => {
+    nats(1).sliding(0);
+  }, RangeError)
+  assert.throws(() => {
+    nats(1).sliding(-1);
+  }, RangeError)
+  assert.throws(() => {
+    nats(1).sliding(1.5);
+  }, RangeError)
+  assert.throws(() => {
+    nats(1).sliding(Math.pow(2, 53));
+  }, RangeError)
+});

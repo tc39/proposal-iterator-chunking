@@ -57,6 +57,35 @@ function windows(this: unknown, windowSize: unknown): Generator<unknown> {
   return windowsImpl(this as Iterator<unknown>, windowSize);
 }
 
+function* slidingImpl<A>(iter: Iterator<A>, windowSize: number): Generator<Array<A>> {
+  let buffer = [];
+  for (const elem of liftIterator(iter)) {
+    if (buffer.length === windowSize) {
+      buffer.shift();
+    }
+    buffer.push(elem);
+    if (buffer.length === windowSize) {
+      yield buffer.slice();
+    }
+  }
+  if (0 < buffer.length && buffer.length < windowSize) {
+    yield buffer;
+  }
+}
+
+function sliding<A>(this: Iterator<A>, windowSize: number): Generator<Array<A>>
+function sliding(this: unknown, windowSize: unknown): Generator<unknown> {
+  if (
+    typeof windowSize !== 'number'
+    || windowSize <= 0
+    || Math.floor(windowSize) !== windowSize
+    || windowSize >= Math.pow(2, 53)
+  ) {
+    throw new RangeError;
+  }
+  return slidingImpl(this as Iterator<unknown>, windowSize);
+}
+
 Object.defineProperty(IteratorPrototype, 'chunks', {
   configurable: true,
   writable: true,
@@ -69,4 +98,11 @@ Object.defineProperty(IteratorPrototype, 'windows', {
   writable: true,
   enumerable: false,
   value: windows,
+});
+
+Object.defineProperty(IteratorPrototype, 'sliding', {
+  configurable: true,
+  writable: true,
+  enumerable: false,
+  value: sliding,
 });
