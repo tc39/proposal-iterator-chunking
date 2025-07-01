@@ -1605,5 +1605,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let sdoMap = JSON.parse(`{}`);
-let biblio = JSON.parse(`{"refsByClause":{},"entries":[{"type":"clause","id":"sec-iterator.prototype.chunks","title":"Iterator.prototype.chunks ( chunkSize )","titleHTML":"Iterator.prototype.chunks ( <var>chunkSize</var> )","number":"1"},{"type":"clause","id":"sec-iterator.prototype.windows","title":"Iterator.prototype.windows ( windowSize )","titleHTML":"Iterator.prototype.windows ( <var>windowSize</var> )","number":"2"}]}`);
+let biblio = JSON.parse(`{"refsByClause":{},"entries":[{"type":"clause","id":"sec-iterator.prototype.chunks","title":"Iterator.prototype.chunks ( chunkSize )","titleHTML":"Iterator.prototype.chunks ( <var>chunkSize</var> )","number":"1"},{"type":"clause","id":"sec-iterator.prototype.sliding","title":"Iterator.prototype.sliding ( windowSize )","titleHTML":"Iterator.prototype.sliding ( <var>windowSize</var> )","number":"2"},{"type":"clause","id":"sec-iterator.prototype.windows","title":"Iterator.prototype.windows ( windowSize )","titleHTML":"Iterator.prototype.windows ( <var>windowSize</var> )","number":"3"}]}`);
 ;let usesMultipage = false
