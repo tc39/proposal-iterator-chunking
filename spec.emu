@@ -50,7 +50,7 @@ copyright: false
       1. Let _error_ be ThrowCompletion(a newly created *RangeError* object).
       1. Return ? IteratorClose(_iterated_, _error_).
     1. If _undersized_ is *undefined*, set _undersized_ to *"discard"*.
-    1. If _undersized_ is neither *"discard"* nor *"truncate"*, then
+    1. If _undersized_ is not one of *"discard"*, *"truncate"*, or *"throw"*, then
       1. Let _error_ be ThrowCompletion(a newly created *TypeError* object).
       1. Return ? IteratorClose(_iterated_, _error_).
     1. Set _iterated_ to ? GetIteratorDirect(_O_).
@@ -59,8 +59,13 @@ copyright: false
       1. Repeat,
         1. Let _value_ be ? IteratorStepValue(_iterated_).
         1. If _value_ is ~done~, then
-          1. If _undersized_ is *"truncate"*, _buffer_ is not empty, and the number of elements in _buffer_ &lt; ℝ(_windowSize_), then
-            1. Perform Completion(Yield(CreateArrayFromList(_buffer_))).
+          1. If _buffer_ is not empty and the number of elements in _buffer_ &lt; ℝ(_windowSize_), then
+            1. If _undersized_ is *"truncate"*, then
+              1. Perform Completion(Yield(CreateArrayFromList(_buffer_))).
+            1. Else if _undersized_ is *"throw"*, then
+              1. Throw a newly created *RangeError* object.
+            1. Else,
+              1. Assert: _undersized_ is *"discard"*.
           1. Return ReturnCompletion(*undefined*).
         1. If the number of elements in _buffer_ is ℝ(_windowSize_), then
           1. Remove the first element from _buffer_.
