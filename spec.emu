@@ -49,8 +49,8 @@ copyright: false
     1. If _windowSize_ is not an integral Number in the inclusive interval from *1*<sub>𝔽</sub> to 𝔽(2<sup>32</sup> - 1), then
       1. Let _error_ be ThrowCompletion(a newly created *RangeError* object).
       1. Return ? IteratorClose(_iterated_, _error_).
-    1. If _undersized_ is *undefined*, set _undersized_ to *"skip"*.
-    1. If _undersized_ is neither *"skip"* nor *"truncate"*, then
+    1. If _undersized_ is *undefined*, set _undersized_ to *"discard"*.
+    1. If _undersized_ is neither *"discard"* nor *"truncate"*, then
       1. Let _error_ be ThrowCompletion(a newly created *TypeError* object).
       1. Return ? IteratorClose(_iterated_, _error_).
     1. Set _iterated_ to ? GetIteratorDirect(_O_).
