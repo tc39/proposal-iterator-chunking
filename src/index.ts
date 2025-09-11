@@ -31,7 +31,7 @@ function chunks(this: unknown, chunkSize: unknown): Generator<unknown> {
   return chunksImpl(this as Iterator<unknown>, chunkSize)
 }
 
-function* windowsImpl<A>(iter: Iterator<A>, windowSize: number): Generator<Array<A>> {
+function* windowsImpl<A>(iter: Iterator<A>, windowSize: number, undersized: 'only full' | 'allow partial'): Generator<Array<A>> {
   let buffer = [];
   for (const elem of liftIterator(iter)) {
     if (buffer.length === windowSize) {
@@ -42,39 +42,13 @@ function* windowsImpl<A>(iter: Iterator<A>, windowSize: number): Generator<Array
       yield buffer.slice();
     }
   }
-}
-
-function windows<A>(this: Iterator<A>, windowSize: number): Generator<Array<A>>
-function windows(this: unknown, windowSize: unknown): Generator<unknown> {
-  if (
-    typeof windowSize !== 'number'
-    || windowSize <= 0
-    || Math.floor(windowSize) !== windowSize
-    || windowSize >= Math.pow(2, 53)
-  ) {
-    throw new RangeError;
-  }
-  return windowsImpl(this as Iterator<unknown>, windowSize);
-}
-
-function* slidingImpl<A>(iter: Iterator<A>, windowSize: number): Generator<Array<A>> {
-  let buffer = [];
-  for (const elem of liftIterator(iter)) {
-    if (buffer.length === windowSize) {
-      buffer.shift();
-    }
-    buffer.push(elem);
-    if (buffer.length === windowSize) {
-      yield buffer.slice();
-    }
-  }
-  if (0 < buffer.length && buffer.length < windowSize) {
+  if (undersized === 'allow partial' && 0 < buffer.length && buffer.length < windowSize) {
     yield buffer;
   }
 }
 
-function sliding<A>(this: Iterator<A>, windowSize: number): Generator<Array<A>>
-function sliding(this: unknown, windowSize: unknown): Generator<unknown> {
+function windows<A>(this: Iterator<A>, windowSize: number, undersized?: 'only full' | 'allow partial'): Generator<Array<A>>
+function windows(this: unknown, windowSize: unknown, undersized?: unknown): Generator<unknown> {
   if (
     typeof windowSize !== 'number'
     || windowSize <= 0
@@ -83,7 +57,13 @@ function sliding(this: unknown, windowSize: unknown): Generator<unknown> {
   ) {
     throw new RangeError;
   }
-  return slidingImpl(this as Iterator<unknown>, windowSize);
+  if (undersized === undefined) {
+    undersized = 'only full';
+  }
+  if (undersized !== 'only full' && undersized !== 'allow partial') {
+    throw new TypeError;
+  }
+  return windowsImpl(this as Iterator<unknown>, windowSize, undersized);
 }
 
 Object.defineProperty(IteratorPrototype, 'chunks', {
@@ -98,11 +78,4 @@ Object.defineProperty(IteratorPrototype, 'windows', {
   writable: true,
   enumerable: false,
   value: windows,
-});
-
-Object.defineProperty(IteratorPrototype, 'sliding', {
-  configurable: true,
-  writable: true,
-  enumerable: false,
-  value: sliding,
 });
