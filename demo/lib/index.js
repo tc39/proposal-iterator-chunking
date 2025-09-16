@@ -36,7 +36,7 @@ function* windowsImpl(iter, windowSize, undersized) {
             yield buffer.slice();
         }
     }
-    if (undersized === 'allow partial' && 0 < buffer.length && buffer.length < windowSize) {
+    if (undersized === 'allow-partial' && 0 < buffer.length && buffer.length < windowSize) {
         yield buffer;
     }
 }
@@ -48,9 +48,9 @@ function windows(windowSize, undersized) {
         throw new RangeError;
     }
     if (undersized === undefined) {
-        undersized = 'only full';
+        undersized = 'only-full';
     }
-    if (undersized !== 'only full' && undersized !== 'allow partial') {
+    if (undersized !== 'only-full' && undersized !== 'allow-partial') {
         throw new TypeError;
     }
     return windowsImpl(this, windowSize, undersized);
