@@ -31,7 +31,7 @@ function chunks(this: unknown, chunkSize: unknown): Generator<unknown> {
   return chunksImpl(this as Iterator<unknown>, chunkSize)
 }
 
-function* windowsImpl<A>(iter: Iterator<A>, windowSize: number, undersized: 'only full' | 'allow partial'): Generator<Array<A>> {
+function* windowsImpl<A>(iter: Iterator<A>, windowSize: number, undersized: 'only-full' | 'allow-partial'): Generator<Array<A>> {
   let buffer = [];
   for (const elem of liftIterator(iter)) {
     if (buffer.length === windowSize) {
@@ -42,12 +42,12 @@ function* windowsImpl<A>(iter: Iterator<A>, windowSize: number, undersized: 'onl
       yield buffer.slice();
     }
   }
-  if (undersized === 'allow partial' && 0 < buffer.length && buffer.length < windowSize) {
+  if (undersized === 'allow-partial' && 0 < buffer.length && buffer.length < windowSize) {
     yield buffer;
   }
 }
 
-function windows<A>(this: Iterator<A>, windowSize: number, undersized?: 'only full' | 'allow partial'): Generator<Array<A>>
+function windows<A>(this: Iterator<A>, windowSize: number, undersized?: 'only-full' | 'allow-partial'): Generator<Array<A>>
 function windows(this: unknown, windowSize: unknown, undersized?: unknown): Generator<unknown> {
   if (
     typeof windowSize !== 'number'
@@ -58,9 +58,9 @@ function windows(this: unknown, windowSize: unknown, undersized?: unknown): Gene
     throw new RangeError;
   }
   if (undersized === undefined) {
-    undersized = 'only full';
+    undersized = 'only-full';
   }
-  if (undersized !== 'only full' && undersized !== 'allow partial') {
+  if (undersized !== 'only-full' && undersized !== 'allow-partial') {
     throw new TypeError;
   }
   return windowsImpl(this as Iterator<unknown>, windowSize, undersized);
