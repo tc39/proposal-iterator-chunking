@@ -38,18 +38,24 @@ test('chunks', async t => {
 
   assert.throws(() => {
     nats(1).chunks();
-  }, RangeError)
+  }, TypeError)
   assert.throws(() => {
     nats(1).chunks([2]);
-  }, RangeError)
+  },TypeError)
+  assert.throws(() => {
+    nats(1).chunks(1.5);
+  }, TypeError)
+  assert.throws(() => {
+    nats(1).chunks('1');
+  }, TypeError)
+  assert.throws(() => {
+    nats(1).chunks(NaN);
+  }, TypeError)
   assert.throws(() => {
     nats(1).chunks(0);
   }, RangeError)
   assert.throws(() => {
     nats(1).chunks(-1);
-  }, RangeError)
-  assert.throws(() => {
-    nats(1).chunks(1.5);
   }, RangeError)
   assert.throws(() => {
     nats(1).chunks(Math.pow(2, 53));
@@ -144,23 +150,62 @@ test('windows', async t => {
 
   assert.throws(() => {
     nats(1).windows()
-  }, RangeError);
+  }, TypeError);
   assert.throws(() => {
     nats(1).windows(undefined, "only-full")
-  }, RangeError);
+  }, TypeError);
   assert.throws(() => {
     nats(1).windows(undefined, "allow-partial")
-  }, RangeError);
+  }, TypeError);
 
   assert.throws(() => {
     nats(1).windows([2]);
-  }, RangeError);
+  }, TypeError);
   assert.throws(() => {
     nats(1).windows([2], "only-full");
-  }, RangeError);
+  }, TypeError);
   assert.throws(() => {
     nats(1).windows([2], "allow-partial");
-  }, RangeError);
+  }, TypeError);
+
+  assert.throws(() => {
+    nats(1).windows(1.5);
+  }, TypeError);
+  assert.throws(() => {
+    nats(1).windows(1.5, undefined);
+  }, TypeError);
+  assert.throws(() => {
+    nats(1).windows(1.5, "only-full");
+  }, TypeError);
+  assert.throws(() => {
+    nats(1).windows(1.5, "allow-partial");
+  }, TypeError);
+
+  assert.throws(() => {
+    nats(1).windows('1');
+  }, TypeError);
+  assert.throws(() => {
+    nats(1).windows('1', undefined);
+  }, TypeError);
+  assert.throws(() => {
+    nats(1).windows('1', "only-full");
+  }, TypeError);
+  assert.throws(() => {
+    nats(1).windows('1', "allow-partial");
+  }, TypeError);
+
+  assert.throws(() => {
+    nats(1).windows(NaN);
+  }, TypeError);
+  assert.throws(() => {
+    nats(1).windows(NaN, undefined);
+  }, TypeError);
+  assert.throws(() => {
+    nats(1).windows(NaN, "only-full");
+  }, TypeError);
+  assert.throws(() => {
+    nats(1).windows(NaN, "allow-partial");
+  }, TypeError);
 
   assert.throws(() => {
     nats(1).windows(0);
@@ -186,19 +231,6 @@ test('windows', async t => {
   }, RangeError);
   assert.throws(() => {
     nats(1).windows(-1, "allow-partial");
-  }, RangeError);
-
-  assert.throws(() => {
-    nats(1).windows(1.5);
-  }, RangeError);
-  assert.throws(() => {
-    nats(1).windows(1.5, undefined);
-  }, RangeError);
-  assert.throws(() => {
-    nats(1).windows(1.5, "only-full");
-  }, RangeError);
-  assert.throws(() => {
-    nats(1).windows(1.5, "allow-partial");
   }, RangeError);
 
   assert.throws(() => {

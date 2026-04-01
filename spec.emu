@@ -16,7 +16,10 @@ copyright: false
     1. Let _O_ be the *this* value.
     1. If _O_ is not an Object, throw a *TypeError* exception.
     1. Let _iterated_ be the Iterator Record { [[Iterator]]: _O_, [[NextMethod]]: *undefined*, [[Done]]: *false* }.
-    1. If _chunkSize_ is not an integral Number in the inclusive interval from *1*<sub>𝔽</sub> to 𝔽(2<sup>32</sup> - 1), then
+    1. If _chunkSize_ is not an integral Number, then
+      1. Let _error_ be ThrowCompletion(a newly created *TypeError* object).
+      1. Return ? IteratorClose(_iterated_, _error_).
+    1. If _chunkSize_ is not in the inclusive interval from *1*<sub>𝔽</sub> to 𝔽(2<sup>32</sup> - 1), then
       1. Let _error_ be ThrowCompletion(a newly created *RangeError* object).
       1. Return ? IteratorClose(_iterated_, _error_).
     1. Set _iterated_ to ? GetIteratorDirect(_O_).
@@ -46,7 +49,10 @@ copyright: false
     1. Let _O_ be the *this* value.
     1. If _O_ is not an Object, throw a *TypeError* exception.
     1. Let _iterated_ be the Iterator Record { [[Iterator]]: _O_, [[NextMethod]]: *undefined*, [[Done]]: *false* }.
-    1. If _windowSize_ is not an integral Number in the inclusive interval from *1*<sub>𝔽</sub> to 𝔽(2<sup>32</sup> - 1), then
+    1. If _windowSize_ is not an integral Number, then
+      1. Let _error_ be ThrowCompletion(a newly created *TypeError* object).
+      1. Return ? IteratorClose(_iterated_, _error_).
+    1. If _windowSize_ is not in the inclusive interval from *1*<sub>𝔽</sub> to 𝔽(2<sup>32</sup> - 1), then
       1. Let _error_ be ThrowCompletion(a newly created *RangeError* object).
       1. Return ? IteratorClose(_iterated_, _error_).
     1. If _undersized_ is *undefined*, set _undersized_ to *"only-full"*.
