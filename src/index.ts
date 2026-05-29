@@ -20,12 +20,10 @@ function* chunksImpl<A>(iter: Iterator<A>, chunkSize: number): Generator<Array<A
 
 function chunks<A>(this: Iterator<A>, chunkSize: number): Generator<Array<A>>
 function chunks(this: unknown, chunkSize: unknown): Generator<unknown> {
-  if (
-    typeof chunkSize !== 'number'
-    || chunkSize <= 0
-    || Math.floor(chunkSize) !== chunkSize
-    || chunkSize >= Math.pow(2, 53)
-  ) {
+  if (typeof chunkSize !== 'number' || Math.floor(chunkSize) !== chunkSize) {
+    throw new TypeError;
+  }
+  if (chunkSize <= 0 || chunkSize >= Math.pow(2, 53)) {
     throw new RangeError;
   }
   return chunksImpl(this as Iterator<unknown>, chunkSize)
@@ -49,12 +47,10 @@ function* windowsImpl<A>(iter: Iterator<A>, windowSize: number, undersized: 'onl
 
 function windows<A>(this: Iterator<A>, windowSize: number, undersized?: 'only-full' | 'allow-partial'): Generator<Array<A>>
 function windows(this: unknown, windowSize: unknown, undersized?: unknown): Generator<unknown> {
-  if (
-    typeof windowSize !== 'number'
-    || windowSize <= 0
-    || Math.floor(windowSize) !== windowSize
-    || windowSize >= Math.pow(2, 53)
-  ) {
+  if (typeof windowSize !== 'number' || Math.floor(windowSize) !== windowSize) {
+    throw new TypeError;
+  }
+  if (windowSize <= 0 || windowSize >= Math.pow(2, 53)) {
     throw new RangeError;
   }
   if (undersized === undefined) {
