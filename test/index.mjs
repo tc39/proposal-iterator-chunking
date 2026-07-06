@@ -58,7 +58,10 @@ test('chunks', async t => {
     nats(1).chunks(-1);
   }, RangeError)
   assert.throws(() => {
-    nats(1).chunks(Math.pow(2, 53));
+    nats(1).chunks(2 ** 32);
+  }, RangeError)
+  assert.throws(() => {
+    nats(1).chunks(2 ** 53);
   }, RangeError)
 });
 
@@ -234,16 +237,29 @@ test('windows', async t => {
   }, RangeError);
 
   assert.throws(() => {
-    nats(1).windows(Math.pow(2, 53));
+    nats(1).windows(2 ** 32);
   }, RangeError);
   assert.throws(() => {
-    nats(1).windows(Math.pow(2, 53), undefined);
+    nats(1).windows(2 ** 32, undefined);
   }, RangeError);
   assert.throws(() => {
-    nats(1).windows(Math.pow(2, 53), "only-full");
+    nats(1).windows(2 ** 32, "only-full");
   }, RangeError);
   assert.throws(() => {
-    nats(1).windows(Math.pow(2, 53), "allow-partial");
+    nats(1).windows(2 ** 32, "allow-partial");
+  }, RangeError);
+
+  assert.throws(() => {
+    nats(1).windows(2 ** 53);
+  }, RangeError);
+  assert.throws(() => {
+    nats(1).windows(2 ** 53, undefined);
+  }, RangeError);
+  assert.throws(() => {
+    nats(1).windows(2 ** 53, "only-full");
+  }, RangeError);
+  assert.throws(() => {
+    nats(1).windows(2 ** 53, "allow-partial");
   }, RangeError);
 
   assert.throws(() => {
